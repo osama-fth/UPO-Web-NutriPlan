@@ -166,6 +166,13 @@ router.put(
         return res.redirect('/user/dashboard/misurazioni');
       }
 
+      // Verifica ownership della misurazione (protezione IDOR)
+      const misurazione = await misurazioniDAO.getMisurazioneById(misurazioneId);
+      if (!misurazione || misurazione.utente_id !== req.user.id) {
+        req.flash('error', 'Misurazione non trovata o non autorizzata');
+        return res.redirect('/user/dashboard/misurazioni');
+      }
+
       await misurazioniDAO.updateMisurazione(misurazioneId, parseFloat(peso), data);
       req.flash('success', 'Misurazione aggiornata con successo.');
       res.redirect('/user/dashboard/misurazioni');

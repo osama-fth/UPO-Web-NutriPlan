@@ -6,6 +6,7 @@ const passport = require('../middleware/passport');
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const utentiDAO = require('../models/dao/utenti-dao');
+const { loginLimiter, registerLimiter } = require('../middleware/rate-limiter');
 
 // Visualizza pagina di login
 router.get('/login', (req, res) => {
@@ -25,6 +26,7 @@ router.get('/login', (req, res) => {
 // Gestisce il processo di login con validazione
 router.post(
   '/login',
+  loginLimiter,
   [check('email').notEmpty().isEmail(), check('password').notEmpty()],
   (req, res, next) => {
     const errors = validationResult(req);
@@ -71,7 +73,7 @@ router.post(
 );
 
 // Gestisce il logout dell'utente
-router.get('/logout', (req, res) => {
+router.post('/logout', (req, res) => {
   if (!req.isAuthenticated()) {
     return res.redirect('/auth/login');
   }
@@ -106,6 +108,7 @@ router.get('/register', (req, res) => {
 // Gestisce la registrazione di nuovi utenti con validazione completa
 router.post(
   '/register',
+  registerLimiter,
   [
     check('nome')
       .notEmpty()

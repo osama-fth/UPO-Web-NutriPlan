@@ -284,6 +284,7 @@
                     <% } else { %>
                       <!-- Se non c'è ancora una recensione, mostra il form per crearne una -->
                       <form id="recensioneForm" action="/user/recensioni/nuova" method="POST">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <div class="mb-3">
                           <fieldset>
                             <legend class="form-label mb-2">La tua valutazione</legend>
@@ -345,6 +346,7 @@
                 <div class="card-body">
                   <!-- Form aggiorna dati -->
                   <form id="updateUserForm" action="/user/account/aggiorna-dati?_method=PUT" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <div class="mb-3">
                       <label for="nome" class="form-label">Nome</label>
                       <input type="text" class="form-control" id="nome" name="nome" value="<%= user.nome %>" required>
@@ -375,6 +377,7 @@
                 <div class="card-body">
                   <!-- Form cambia password -->
                   <form id="changePasswordForm" action="/user/account/cambia-password?_method=PUT" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <div class="mb-3">
                       <label for="password_attuale" class="form-label">Password attuale</label>
                       <input type="password" class="form-control" id="password_attuale" name="password_attuale" required
@@ -438,6 +441,7 @@
           </div>
           <div class="modal-body">
             <form id="nuovaMisurazioneForm" action="/user/misurazioni/nuova" method="POST">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
               <div class="mb-3">
                 <label for="peso" class="form-label">Peso (kg)</label>
                 <input type="number" class="form-control" id="peso" name="peso" step="0.1" min="1" max="300" required>
@@ -467,6 +471,7 @@
           <div class="modal-body">
             <!-- Form modifica misurazione -->
             <form id="modificaMisurazioneForm" action="/user/misurazioni/modifica?_method=PUT" method="POST">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
               <input type="hidden" id="misurazioneId" name="misurazioneId">
               <div class="mb-3">
                 <label for="pesoModifica" class="form-label">Peso (kg)</label>

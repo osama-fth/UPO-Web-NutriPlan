@@ -12,6 +12,7 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
         <form id="eliminaPianoForm" action="/admin/piani-alimentari/elimina" method="POST" class="d-inline">
           <input type="hidden" name="_method" value="DELETE">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
           <input type="hidden" id="pianoId" name="pianoId">
           <button type="submit" class="btn btn-danger">Elimina</button>
         </form>

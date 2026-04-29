@@ -127,6 +127,7 @@
                     <%- include('../partials/alerts') %>
 
                       <form class="mt-4" action="/contatti/invia" method="POST">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <div class="mb-3">
                           <label for="contactName" class="form-label">Nome</label>
                           <input type="text" class="form-control" id="contactName" name="nome"

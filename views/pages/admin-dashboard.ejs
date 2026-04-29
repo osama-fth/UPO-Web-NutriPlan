@@ -439,6 +439,7 @@
                 <div class="card-body">
                   <!-- Form cambia password -->
                   <form id="changePasswordForm" action="/admin/account/cambia-password?_method=PUT" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <div class="mb-3">
                       <label for="password_attuale" class="form-label">Password attuale</label>
                       <input type="password" class="form-control" id="password_attuale" name="password_attuale" required

@@ -5,6 +5,7 @@ const router = express.Router();
 const recensioniDAO = require('../models/dao/recensioni-dao');
 const contattiDAO = require('../models/dao/contatti-dao');
 const { check, validationResult } = require('express-validator');
+const { contactLimiter } = require('../middleware/rate-limiter');
 
 // Visualizza la pagina home del sito
 router.get('/', async (req, res) => {
@@ -61,6 +62,7 @@ router.get('/recensioni/filtra', async (req, res) => {
 // Gestisce l'invio di messaggi di contatto con validazione
 router.post(
   '/contatti/invia',
+  contactLimiter,
   [
     check('nome')
       .notEmpty()
